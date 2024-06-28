@@ -1,9 +1,11 @@
 const express = require("express");
+const { userController } = require("../controller");
 const route = express.Router({ mergeParams: true });
 
 class Routes {
   constructor() {
     this.route = route;
+    this.userController = userController;
     this.useRoute();
   }
 
@@ -16,8 +18,8 @@ class Routes {
 
   getRoutes() {
     this.route.get("/list", (req, res, next) => {
-      console.log("Users list route hitted");
-      res.send("Users list route hitted");
+      // res.send("Users list route hitted");
+      this.userController.getUserList(req, res, next);
     });
   }
 
