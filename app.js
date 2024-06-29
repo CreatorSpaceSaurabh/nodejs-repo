@@ -3,12 +3,11 @@ const app = express();
 require("dotenv").config();
 global.express = express;
 
-// const router = require("./Routes/index");
+// Mongo connection
+const mongoInstance = require("./config/mongo.config");
+mongoInstance.connect();
 
-// app.use("/", (req, res, next) => {
-//   res.send("Welcome to the default server page, current status is running");
-// });
-
+// APIs path
 app.use("/api", require("./Routes/index"));
 
 const PORT = process.env.PORT;
