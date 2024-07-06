@@ -6,12 +6,18 @@ const findOneRecords = async (model, condition, options) => {
   return await model.findOne(condition, options);
 };
 
-const save = async (model, obj) => {
+const createRecord = async (model, obj) => {
   return await model.create(obj);
+};
+
+const saveRecord = async (model, obj) => {
+  const record = await model(obj).save();
+  return record;
 };
 
 module.exports = {
   findAllRecords,
   findOneRecords,
-  save,
+  createRecord,
+  saveRecord,
 };
