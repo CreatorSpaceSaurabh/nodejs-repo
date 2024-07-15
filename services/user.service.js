@@ -19,5 +19,22 @@ class UserService {
       next(error.message);
     }
   }
+
+  async getComplexQuery(next) {
+    try {
+      let count = 0;
+
+      for (let i = 0; i < 100000; i++) {
+        count++;
+      }
+      return {
+        success: true,
+        data: count,
+        message: "Complex operation fetched success",
+      };
+    } catch (error) {
+      next(error.message);
+    }
+  }
 }
 module.exports = new UserService();
