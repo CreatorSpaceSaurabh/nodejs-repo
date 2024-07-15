@@ -21,6 +21,10 @@ class Routes {
       // res.send("Users list route hitted");
       this.userController.getUserList(req, res, next);
     });
+
+    this.route.get("/getComplex", (req, res, next) => {
+      this.userController.getComplexOperation(req, res, next);
+    });
   }
 
   postRoutes() {}
