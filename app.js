@@ -12,7 +12,7 @@ mongoInstance.connect();
 let redisClient;
 (async () => {
   redisClient = redis.createClient({
-    port: 6379,
+    port: process.env.REDIS_PORT,
     host: process.env.REDIS_HOST,
     //In order to turn off queuing commands and get an error if we couldn't connect to the redis server
     enable_offline_queue: false,
