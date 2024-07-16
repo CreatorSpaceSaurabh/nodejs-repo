@@ -1,5 +1,4 @@
 const { userService } = require("../services");
-
 class UserController {
   async getUserList(req, res, next) {
     try {
