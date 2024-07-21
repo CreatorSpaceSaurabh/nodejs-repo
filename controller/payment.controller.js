@@ -1,5 +1,5 @@
 const { createRazorpayInstance } = require("../config/razorpay.config");
-
+const crypto = require("crypto");
 const razorpayInstance = createRazorpayInstance();
 class PaymentController {
   /**
@@ -36,7 +36,41 @@ class PaymentController {
         success: false,
         message: "Something went wrong",
       });
-      next(error.message);
+      //   next(error.message);
+    }
+  }
+
+  /**
+   * @summary verify payment
+   * @body req.body
+   * @date 20 July 2024
+   */
+  async verifyPayment(req, res, next) {
+    try {
+      const { order_id, payment_id, signature } = req.body;
+
+      const secret = process.env.RAZORPAY_KEY_SECRET;
+      // create hmac object
+      const hmac = crypto.createHmac("sha256", secret);
+      hmac.update(order_id + "|" + payment_id);
+
+      // generate signature
+      const generatedSignature = hmac.digest("hex");
+
+      if (generatedSignature === signature) {
+        // db operation , data updation
+        return res.status(200).json({
+          success: true,
+          message: "Payment verified",
+        });
+      } else {
+        return res.status(400).json({
+          success: true,
+          message: "Payment not verified",
+        });
+      }
+    } catch (error) {
+      return next(error.message);
     }
   }
 }

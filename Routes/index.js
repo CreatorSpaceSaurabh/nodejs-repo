@@ -4,4 +4,6 @@ const Router = express.Router({ mergeParams: true });
 
 Router.use("/user", require("./user.route"));
 
+Router.use("/payment", require("./payment.route"));
+
 module.exports = Router;
