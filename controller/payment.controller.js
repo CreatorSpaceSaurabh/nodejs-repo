@@ -3,7 +3,7 @@ const crypto = require("crypto");
 const razorpayInstance = createRazorpayInstance();
 class PaymentController {
   /**
-   * @summary create order
+   * @summary create order with razorpay
    * @body req.body
    * @date 20 July 2024
    */
@@ -41,7 +41,7 @@ class PaymentController {
   }
 
   /**
-   * @summary verify payment
+   * @summary verify payment created for order
    * @body req.body
    * @date 20 July 2024
    */
